@@ -19,11 +19,11 @@ import lombok.experimental.FieldDefaults;
 public class User {
 
     @Id
-    int id;
+    Integer id;
 
     String username;
 
-    double score;
+    Double score;
     
     Set<Badge> badges;
 
