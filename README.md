@@ -50,9 +50,8 @@ Make sure you have MongoDB running on your local machine or update the applicati
 ## Testing
 Run the JUnit test cases using:
 
-    ```bash
     mvnw test
-    ```
+
 The tests include Mockito for mocking dependencies and verifying interactions between components.
 
 
