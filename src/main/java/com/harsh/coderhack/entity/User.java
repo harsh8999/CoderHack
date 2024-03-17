@@ -14,7 +14,7 @@ import lombok.experimental.FieldDefaults;
 /**
  * Represents a user entity in the CoderHack application.
  */
-@Document(collation = "user")
+@Document("user")
 @FieldDefaults(level = AccessLevel.PRIVATE)
 @Data
 @NoArgsConstructor
