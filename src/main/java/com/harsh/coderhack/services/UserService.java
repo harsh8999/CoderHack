@@ -12,6 +12,7 @@ public interface UserService {
 
     /**
      * Retrieves a list of all users.
+     * Sorted on based of score.
      *
      * @return A list of {@link UserResponseDto} objects representing all users.
      */
