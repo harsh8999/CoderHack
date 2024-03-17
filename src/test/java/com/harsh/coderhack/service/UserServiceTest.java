@@ -62,4 +62,24 @@ public class UserServiceTest {
         when(userRepository.findById(any(Integer.class))).thenThrow(ResourceNotFoundException.class);
         assertThrows(ResourceNotFoundException.class, () -> userService.getUser(90));
     }
+
+    @Test
+    public void deregisterUserThrowsExceptionUserNotFoundTest() {
+        when(userRepository.findById(any(Integer.class))).thenThrow(ResourceNotFoundException.class);
+        assertThrows(ResourceNotFoundException.class, () -> userService.deregisterUserFromTheContest(90));
+    }
+
+    @Test
+    public void updateUserScoreThrowsExceptionUserNotFoundTest() {
+        when(userRepository.findById(any(Integer.class))).thenThrow(ResourceNotFoundException.class);
+        assertThrows(ResourceNotFoundException.class, () -> userService.updateScoreOfUser(82, 90));
+    }
+    
+    @Test
+    public void updateUserScoreThrowsRuntimeExceptionTest() {
+        // score less than 0
+        assertThrows(RuntimeException.class, () -> userService.updateScoreOfUser(1, -19));
+        // score more than 100
+        assertThrows(RuntimeException.class, () -> userService.updateScoreOfUser(1,200));
+    }
 }
