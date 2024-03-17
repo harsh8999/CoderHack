@@ -24,6 +24,8 @@ public class UserServiceImplementation implements UserService {
         List<User> users = userRepository.findAll();
         List<UserResponseDto> userResponseDtos = new ArrayList<>();
         users.forEach(user -> userResponseDtos.add(new UserResponseDto(user.getId(), user.getUsername(), user.getScore(), user.getBadges())));
+        // sort the users based on score
+        userResponseDtos.sort((a, b) -> a.getScore().compareTo(b.getScore()));
         return userResponseDtos;
     }
 
