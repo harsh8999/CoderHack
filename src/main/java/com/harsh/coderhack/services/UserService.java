@@ -3,6 +3,7 @@ package com.harsh.coderhack.services;
 import java.util.List;
 
 import com.harsh.coderhack.dto.UserResponseDto;
+import com.harsh.coderhack.exception.ResourceNotFoundException;
 
 /**
  * This interface represents the service layer for managing users in the CoderHack application.
@@ -12,7 +13,7 @@ public interface UserService {
     /**
      * Retrieves a list of all users.
      *
-     * @return A list of UserResponseDto objects representing all users.
+     * @return A list of {@link UserResponseDto} objects representing all users.
      */
     List<UserResponseDto> getAllUsers();
 
@@ -20,9 +21,10 @@ public interface UserService {
      * Retrieves information about a specific user.
      *
      * @param userId The unique identifier of the user.
-     * @return A UserResponseDto object containing information about the user.
+     * @return A {@link UserResponseDto} object containing information about the user.
+     * @throws ResourceNotFoundException if the user with the given ID is not found.
      */
-    UserResponseDto getUser(int userId);
+    UserResponseDto getUser(int userId) throws ResourceNotFoundException;
     
 
     /**
@@ -30,7 +32,7 @@ public interface UserService {
      *
      * @param userId   The unique identifier for the new user.
      * @param username The username of the new user.
-     * @return A UserResponseDto object representing the created user.
+     * @return A {@link UserResponseDto} object representing the created user.
      */
     UserResponseDto createUser(int userId, String username);
 
@@ -39,15 +41,16 @@ public interface UserService {
      *
      * @param userId The unique identifier of the user whose score is to be updated.
      * @param score  The new score of the user.
-     * @return A UserResponseDto object representing the user with the updated score.
+     * @return A {@link UserResponseDto} object representing the user with the updated score.
+     * @throws ResourceNotFoundException if the user with the given ID is not found.
      */
-    UserResponseDto updateScoreOfUser(int userId, double score);
+    UserResponseDto updateScoreOfUser(int userId, double score) throws ResourceNotFoundException;
 
     /**
      * Deregisters a user from the contest.
      *
      * @param userId The unique identifier of the user to be deregistered.
+     * @throws ResourceNotFoundException if the user with the given ID is not found.
      */
-    void deregisterUserFromTheContest(int userId);
-
+    void deregisterUserFromTheContest(int userId) throws ResourceNotFoundException;
 }

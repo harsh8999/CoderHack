@@ -7,6 +7,7 @@ import org.springframework.stereotype.Service;
 
 import com.harsh.coderhack.dto.UserResponseDto;
 import com.harsh.coderhack.entity.User;
+import com.harsh.coderhack.exception.ResourceNotFoundException;
 import com.harsh.coderhack.repository.UserRepository;
 
 @Service
@@ -27,8 +28,8 @@ public class UserServiceImplementation implements UserService {
     }
 
     @Override
-    public UserResponseDto getUser(int userId) {
-        User user = userRepository.findById(userId).orElseThrow(() -> new RuntimeException());
+    public UserResponseDto getUser(int userId) throws ResourceNotFoundException {
+        User user = userRepository.findById(userId).orElseThrow(() -> new ResourceNotFoundException("User", "User ID", Integer.toString(userId)));
         UserResponseDto userResponseDto = new UserResponseDto(user.getId(), user.getUsername(), user.getScore(), user.getBadges());
         
         return userResponseDto;
@@ -44,7 +45,7 @@ public class UserServiceImplementation implements UserService {
     }
 
     @Override
-    public UserResponseDto updateScoreOfUser(int userId, double score) {
+    public UserResponseDto updateScoreOfUser(int userId, double score) throws ResourceNotFoundException {
         if(score < 0) {
             throw new RuntimeException("Score Cannot be Less Than 0!!!");
         }
@@ -52,7 +53,7 @@ public class UserServiceImplementation implements UserService {
             throw new RuntimeException("Score Cannot be More Than 100!!!");
         }
 
-        User user = userRepository.findById(userId).orElseThrow(() -> new RuntimeException());
+        User user = userRepository.findById(userId).orElseThrow(() -> new ResourceNotFoundException("User", "User ID", Integer.toString(userId)));
         // update the score
         user.setScore(score);
         // update the batch accordingly
@@ -66,8 +67,8 @@ public class UserServiceImplementation implements UserService {
     }
 
     @Override
-    public void deregisterUserFromTheContest(int userId) {
-        User user = userRepository.findById(userId).orElseThrow(() -> new RuntimeException());
+    public void deregisterUserFromTheContest(int userId) throws ResourceNotFoundException {
+        User user = userRepository.findById(userId).orElseThrow(() -> new ResourceNotFoundException("User", "User ID", Integer.toString(userId)));
         userRepository.delete(user);
     }
     
