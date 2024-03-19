@@ -30,24 +30,25 @@ public class UserServiceImplementation implements UserService {
     }
 
     @Override
-    public UserResponseDto getUser(int userId) throws ResourceNotFoundException {
-        User user = userRepository.findById(userId).orElseThrow(() -> new ResourceNotFoundException("User", "User ID", Integer.toString(userId)));
+    public UserResponseDto getUser(String userId) throws ResourceNotFoundException {
+        User user = userRepository.findById(userId).orElseThrow(() -> new ResourceNotFoundException("User", "User ID", userId));
         UserResponseDto userResponseDto = new UserResponseDto(user.getId(), user.getUsername(), user.getScore(), user.getBadges());
         
         return userResponseDto;
     }
 
     @Override
-    public UserResponseDto createUser(int userId, String username) {
-        User newUser = new User(userId, username);
-        User savedUser = userRepository.save(newUser);
+    public UserResponseDto createUser(String username) {
+        User newUser = new User(username);
+        // User savedUser = userRepository.save(newUser);
+        User savedUser = userRepository.insert(newUser);
         UserResponseDto userResponseDto = new UserResponseDto(savedUser.getId(), savedUser.getUsername(), savedUser.getScore(), savedUser.getBadges());
         
         return userResponseDto;
     }
 
     @Override
-    public UserResponseDto updateScoreOfUser(int userId, double score) throws ResourceNotFoundException {
+    public UserResponseDto updateScoreOfUser(String userId, double score) throws ResourceNotFoundException {
         if(score < 0) {
             throw new RuntimeException("Score Cannot be Less Than 0!!!");
         }
@@ -55,7 +56,7 @@ public class UserServiceImplementation implements UserService {
             throw new RuntimeException("Score Cannot be More Than 100!!!");
         }
 
-        User user = userRepository.findById(userId).orElseThrow(() -> new ResourceNotFoundException("User", "User ID", Integer.toString(userId)));
+        User user = userRepository.findById(userId).orElseThrow(() -> new ResourceNotFoundException("User", "User ID", userId));
         // update the score
         user.setScore(score);
         // update the batch accordingly
@@ -69,8 +70,8 @@ public class UserServiceImplementation implements UserService {
     }
 
     @Override
-    public void deregisterUserFromTheContest(int userId) throws ResourceNotFoundException {
-        User user = userRepository.findById(userId).orElseThrow(() -> new ResourceNotFoundException("User", "User ID", Integer.toString(userId)));
+    public void deregisterUserFromTheContest(String userId) throws ResourceNotFoundException {
+        User user = userRepository.findById(userId).orElseThrow(() -> new ResourceNotFoundException("User", "User ID", userId));
         userRepository.delete(user);
     }
     

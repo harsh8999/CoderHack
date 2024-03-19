@@ -25,7 +25,7 @@ public interface UserService {
      * @return A {@link UserResponseDto} object containing information about the user.
      * @throws ResourceNotFoundException if the user with the given ID is not found.
      */
-    UserResponseDto getUser(int userId) throws ResourceNotFoundException;
+    UserResponseDto getUser(String userId) throws ResourceNotFoundException;
     
 
     /**
@@ -35,7 +35,8 @@ public interface UserService {
      * @param username The username of the new user.
      * @return A {@link UserResponseDto} object representing the created user.
      */
-    UserResponseDto createUser(int userId, String username);
+    // UserResponseDto createUser(int userId, String username);
+    UserResponseDto createUser(String username);
 
     /**
      * Updates the score of a user with the given userId.
@@ -45,7 +46,7 @@ public interface UserService {
      * @return A {@link UserResponseDto} object representing the user with the updated score.
      * @throws ResourceNotFoundException if the user with the given ID is not found.
      */
-    UserResponseDto updateScoreOfUser(int userId, double score) throws ResourceNotFoundException;
+    UserResponseDto updateScoreOfUser(String userId, double score) throws ResourceNotFoundException;
 
     /**
      * Deregisters a user from the contest.
@@ -53,5 +54,5 @@ public interface UserService {
      * @param userId The unique identifier of the user to be deregistered.
      * @throws ResourceNotFoundException if the user with the given ID is not found.
      */
-    void deregisterUserFromTheContest(int userId) throws ResourceNotFoundException;
+    void deregisterUserFromTheContest(String userId) throws ResourceNotFoundException;
 }

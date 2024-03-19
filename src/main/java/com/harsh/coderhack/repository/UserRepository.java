@@ -9,6 +9,6 @@ import com.harsh.coderhack.entity.User;
  * This interface represents a repository for managing User entities in the MongoDB database.
  */
 @Repository
-public interface UserRepository extends MongoRepository<User, Integer> {
+public interface UserRepository extends MongoRepository<User, String> {
     
 }

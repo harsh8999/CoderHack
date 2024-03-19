@@ -2,10 +2,6 @@
 
 Welcome to the CoderHack Leaderboard API! This application provides a RESTful API service to manage the leaderboard for a coding platform's contest. It utilizes Spring Boot for backend development and MongoDB for data persistence.
 
-## Problem Statement
-
-The goal of this project is to develop an API service that can handle CRUD operations for user registrations, manage leaderboard rankings, and award badges based on user scores.
-
 ## Requirements
 
 - Handle CRUD operations for user registrations
@@ -22,8 +18,22 @@ The goal of this project is to develop an API service that can handle CRUD opera
 - GET /users - Retrieve a list of all registered users
 - GET /users/{userId} - Retrieve the details of a specific user
 - POST /users - Register a new user to the contest
+## Request Body
+```json
+{
+   "username":"Harsh"
+}
+```
 - PUT /users/{userId} - Update the score of a specific user
+## Request Body
+```json
+{
+   "score":97
+}
+```
 - DELETE /users/{userId} - Deregister a specific user from the contest
+
+
 
 ## Setup
 
@@ -54,7 +64,8 @@ Run the JUnit test cases using:
 
 The tests include Mockito for mocking dependencies and verifying interactions between components.
 
-
+## Postman Collection
+https://elements.getpostman.com/redirect?entityId=7585977-91431c0d-2f04-429f-ba63-8bb8b9310765&entityType=collection
 
 ## License
 Harsh Nayak

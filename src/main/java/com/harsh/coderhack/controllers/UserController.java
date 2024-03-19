@@ -32,7 +32,8 @@ public class UserController {
 
     @PostMapping
     public ResponseEntity<UserResponseDto> postMethodName(@RequestBody UserRequestDto userRequestDto) {
-        UserResponseDto userResponseDto = userService.createUser(userRequestDto.getId(), userRequestDto.getUsername());
+        // UserResponseDto userResponseDto = userService.createUser(userRequestDto.getId(), userRequestDto.getUsername());
+        UserResponseDto userResponseDto = userService.createUser(userRequestDto.getUsername());
         return new ResponseEntity<>(userResponseDto, HttpStatus.CREATED);
     }
 
@@ -42,17 +43,17 @@ public class UserController {
     }
     
     @GetMapping("/{userId}")
-    public ResponseEntity<UserResponseDto> getUserById(@PathVariable Integer userId) {
+    public ResponseEntity<UserResponseDto> getUserById(@PathVariable String userId) {
         return ResponseEntity.ok(userService.getUser(userId));
     }
     
     @PutMapping("/{userId}")
-    public ResponseEntity<UserResponseDto> updateScore(@PathVariable Integer userId, @RequestBody UpdateScoreRequest updateScoreRequest) {
+    public ResponseEntity<UserResponseDto> updateScore(@PathVariable String userId, @RequestBody UpdateScoreRequest updateScoreRequest) {
         return new ResponseEntity(userService.updateScoreOfUser(userId, updateScoreRequest.getScore()), HttpStatus.OK);
     }
 
     @DeleteMapping("/{userId}")
-    public ResponseEntity<String> deleteUser(@PathVariable Integer userId) {
+    public ResponseEntity<String> deleteUser(@PathVariable String userId) {
         userService.deregisterUserFromTheContest(userId);
         return new ResponseEntity("User deregistered..", HttpStatus.OK);
     }

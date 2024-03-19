@@ -16,7 +16,7 @@ import lombok.experimental.FieldDefaults;
 @FieldDefaults(level = AccessLevel.PRIVATE)
 public class UserResponseDto {
     
-    Integer id;
+    String id;
     String username;
     Double score;
     Set<Badge> badges;

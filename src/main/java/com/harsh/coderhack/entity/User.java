@@ -24,7 +24,7 @@ public class User {
      * The unique identifier of the user.
      */
     @Id
-    Integer id;
+    String id;
 
     /**
      * The username of the user.
@@ -49,8 +49,8 @@ public class User {
      * @param id       The unique identifier of the user.
      * @param username The username of the user.
      */
-    public User(int id, String username) {
-        this.id = id;
+    public User(String username) {
+        // this.id = id;
         this.username = username;
         this.score = 0D;
         this.badges = new HashSet<Badge>();
