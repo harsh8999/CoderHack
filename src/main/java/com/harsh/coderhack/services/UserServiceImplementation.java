@@ -10,11 +10,19 @@ import com.harsh.coderhack.entity.User;
 import com.harsh.coderhack.exception.ResourceNotFoundException;
 import com.harsh.coderhack.repository.UserRepository;
 
+/**
+ * Implementation of the UserService interface providing methods to manage users.
+ */
 @Service
 public class UserServiceImplementation implements UserService {
 
     private UserRepository userRepository;
 
+    /**
+     * Constructor for UserServiceImplementation.
+     *
+     * @param userRepository the UserRepository instance to be injected
+     */
     public UserServiceImplementation(UserRepository userRepository) {
         this.userRepository = userRepository;
     }
@@ -40,7 +48,6 @@ public class UserServiceImplementation implements UserService {
     @Override
     public UserResponseDto createUser(String username) {
         User newUser = new User(username);
-        // User savedUser = userRepository.save(newUser);
         User savedUser = userRepository.insert(newUser);
         UserResponseDto userResponseDto = new UserResponseDto(savedUser.getId(), savedUser.getUsername(), savedUser.getScore(), savedUser.getBadges());
         

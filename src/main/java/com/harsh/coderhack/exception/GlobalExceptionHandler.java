@@ -7,9 +7,19 @@ import org.springframework.web.bind.annotation.RestControllerAdvice;
 
 import com.harsh.coderhack.dto.ExceptionApiResponse;
 
+/**
+ * Global exception handler for handling exceptions thrown within controller methods.
+ * This class provides methods to handle specific types of exceptions and return appropriate HTTP responses.
+ */
 @RestControllerAdvice
 public class GlobalExceptionHandler {
  
+    /**
+     * Handles ResourceNotFoundException and returns an HTTP 404 (Not Found) response.
+     * 
+     * @param ex the ResourceNotFoundException to handle
+     * @return ResponseEntity containing an ExceptionApiResponse with the error message and HTTP status
+     */
     @ExceptionHandler(ResourceNotFoundException.class)
     public ResponseEntity<ExceptionApiResponse> resourceNotFoundExceptionHandler(ResourceNotFoundException ex){
         String message = ex.getMessage();
@@ -17,6 +27,12 @@ public class GlobalExceptionHandler {
         return new ResponseEntity<>(apiResponse, HttpStatus.NOT_FOUND);
     }
 
+    /**
+     * Handles RuntimeException and returns an HTTP 400 (Bad Request) response.
+     * 
+     * @param ex the RuntimeException to handle
+     * @return ResponseEntity containing an ExceptionApiResponse with the error message and HTTP status
+     */
     @ExceptionHandler(RuntimeException.class)
     public ResponseEntity<ExceptionApiResponse> runtimeExceptionHandler(RuntimeException ex){
         String message = ex.getMessage();

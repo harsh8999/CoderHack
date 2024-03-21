@@ -6,13 +6,19 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 import lombok.experimental.FieldDefaults;
 
+/**
+ * DTO (Data Transfer Object) representing the request for a user.
+ * Contains user information such as username.
+ */
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
 @FieldDefaults(level = AccessLevel.PRIVATE)
 public class UserRequestDto {
     
-    // Integer id;
+    /**
+     * The username of the user.
+     */
     String username;
 
 }
